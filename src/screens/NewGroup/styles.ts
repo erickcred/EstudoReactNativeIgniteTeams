@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { UsersFour, UsersThree } from 'phosphor-react-native';
+import { UsersThree } from 'phosphor-react-native';
 
 import theme from '@theme/index';
 
