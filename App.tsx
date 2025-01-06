@@ -1,3 +1,4 @@
+import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
@@ -6,7 +7,6 @@ import { useFonts , Roboto_400Regular, Roboto_700Bold  } from '@expo-google-font
 
 import { NewGroup } from '@screens/NewGroup';
 import { Loading } from '@components/Loading';
-
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
