@@ -13,8 +13,8 @@ export function Input({ ...rest }: TextInputProps) {
   return (
     <Container { ...rest }
       placeholderTextColor={ theme.COLORS.GRAY_300 } 
-      onChanged={setNomeTurma}
-      value={nomeTurma}
+      // onChanged={setNomeTurma}
+      // value={nomeTurma}
     />
   )
 }
