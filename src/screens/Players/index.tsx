@@ -1,4 +1,5 @@
 import { FlatList } from "react-native";
+import { useState } from "react";
 
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 
@@ -7,14 +8,15 @@ import { HighLight } from "@components/HighLight";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Input } from "@components/Input";
 import { Filter } from "@components/Filter";
-import { useState } from "react";
-import { GroupCard } from "@components/GroupCard";
-import { Title } from '../../components/Filter/styles';
+import { PlayerCard } from "@components/PlayerCard";
+import { ListEmpty } from "@components/ListEmpty";
+import { Button } from "@components/Button";
 
 export function Players() {
-  const [ players, setPlayers ] = useState<string[]>([  ]);
-  const [ player, setPlayer ] = useState<string>('');
   const [ team, setTeam ] = useState<string>('time a');
+  // const [ players, setPlayers ] = useState<string[]>([ 'Arthur', 'João', 'Maria', 'Gabriel', 'Maily', 'Ashley', 'Kimberly', 'Pedro', 'Jederson', 'Maria Fernanda' ]);
+  const [ players, setPlayers ] = useState<string[]>([ ]);
+  const [ player, setPlayer ] = useState<string>('');
 
   function addPlayer() {
     console.log(player);
@@ -55,16 +57,28 @@ export function Players() {
         <NumberOfPlayers>{ players.length }</NumberOfPlayers>
       </HeaderList>
 
-      <FlatList 
+      <FlatList
         data={ players }
         keyExtractor={ item => item }
         renderItem={({ item }) => (
-          <GroupCard title={item} />
+          <PlayerCard name={ item } onRemove={() => console.log(item)} />
         )}
         showsVerticalScrollIndicator={ false }
+        contentContainerStyle={[
+          // { paddingBottom: 100 },
+          players.length === 0 ? { flex: 1 } : { paddingBottom: 100 }
+        ]}
+        ListEmptyComponent={() => (
+          <ListEmpty
+            message="Não há pessoas nesse time"
+          />
+        )}
       />
 
-      
+      <Button 
+        title="Remover turma"
+        type="SECONDARY"
+      />
     </Container>
   )
 }
