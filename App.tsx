@@ -2,12 +2,12 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
+import { Routes } from '@routes/index';
+
 import theme from '@theme/index';
 import { useFonts , Roboto_400Regular, Roboto_700Bold  } from '@expo-google-fonts/roboto'
 
-import { NewGroup } from '@screens/NewGroup';
 import { Loading } from '@components/Loading';
-import { Players } from '@screens/Players';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
         translucent={true}
       />
       
-      { fontsLoaded ? <Players /> : <Loading /> }
+      { fontsLoaded ? <Routes /> : <Loading /> }
     </ThemeProvider>
   );
 }

@@ -4,14 +4,15 @@ import logoImg from '@assets/logo.png'
 
 type Props = {
   showBackButton?: boolean;
+  onBack?: () => void;
 }
 
-export function Header({ showBackButton = false }: Props) {
+export function Header({ showBackButton = false, onBack }: Props) {
   return (
     <Container>
       {
         showBackButton &&
-        <BackButton>
+        <BackButton onPress={onBack}>
           <BackIcon />
         </BackButton>
       }
