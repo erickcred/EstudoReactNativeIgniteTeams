@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import { Alert, FlatList, TextInput } from "react-native";
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 
@@ -18,6 +18,7 @@ import { AppError } from "@utils/AppError";
 import { playerRemoveByGroup } from "@storage/players/playerRemoveByGroup";
 import { playersGetByGroupAndTeam } from "@storage/players/playersGetByGroupAndTeam";
 import { groupRemove } from "@storage/group/groupRemove";
+import { Loading } from "@components/Loading/loading";
 
 type RouteParams = {
   group: string;
@@ -25,6 +26,8 @@ type RouteParams = {
 
 export function Players() {
   const navigation = useNavigation();
+
+  const [ isLoding, setIsLoding ] = useState<boolean>(true);
   const [ team, setTeam ] = useState<string>('Time a');
   const [ newPlayerName, setNewPlayerName ] = useState<string>('');
   const [ players, setPlayers ] = useState<PlayerStorageDTO[]>([]);
@@ -38,6 +41,7 @@ export function Players() {
   }
 
   async function handleAddPlayer() {
+    setIsLoding(true);
     if (newPlayerName.trim().toLowerCase().length === 0) {
       return Alert.alert('Novo jogador', 'Informe o nome do jogador.');
     }
@@ -106,14 +110,16 @@ export function Players() {
   async function fetchPlayersByTeam() {
     try {
       const data = await playersGetByGroupAndTeam(group, team);
+      
       setPlayers(data);
+      setIsLoding(false);
     } catch (error) {
       Alert.alert('Novo jogador', 'Não foi possível carregar os jogadores do time selecionado!');
       console.log(error);
     }
   }
 
-  useFocusEffect(useCallback(() => {
+  useEffect(useCallback(() => {
     fetchPlayersByTeam();
     }, [ team, handleRemovePlayer ])
   );
@@ -159,23 +165,26 @@ export function Players() {
         <NumberOfPlayers>{ players.length }</NumberOfPlayers>
       </HeaderList>
 
-      <FlatList
-        data={ players }
-        keyExtractor={ item => item.name+item.team }
-        renderItem={({ item }) => (
-          <PlayerCard name={ item.name } onRemove={() => handleRemovePlayer(item)} />
-        )}
-        showsVerticalScrollIndicator={ false }
-        contentContainerStyle={[
-          // { paddingBottom: 100 },
-          players.length === 0 ? { flex: 1 } : { paddingBottom: 100 }
-        ]}
-        ListEmptyComponent={() => (
-          <ListEmpty
-            message={ `Não há pessoas nesse time ${team.toUpperCase()}` } 
-          />
-        )}
-      />
+      {
+        isLoding ? <Loading /> :
+        <FlatList
+          data={ players }
+          keyExtractor={ item => item.name+item.team }
+          renderItem={({ item }) => (
+            <PlayerCard name={ item.name } onRemove={() => handleRemovePlayer(item)} />
+          )}
+          showsVerticalScrollIndicator={ false }
+          contentContainerStyle={[
+            // { paddingBottom: 100 },
+            players.length === 0 ? { flex: 1 } : { paddingBottom: 100 }
+          ]}
+          ListEmptyComponent={() => (
+            <ListEmpty
+              message={ `Não há pessoas nesse time ${team.toUpperCase()}` } 
+            />
+          )}
+        />
+      }
 
       <Button 
         title="Remover turma"

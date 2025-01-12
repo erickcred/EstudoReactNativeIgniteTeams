@@ -10,10 +10,13 @@ import { ListEmpty } from "@components/ListEmpty/listEmpty"
 import { Button } from "@components/Button/button";
 import { groupsGetAll } from '@storage/group/groupsGetAll';
 import { groupRemove } from '@storage/group/groupRemove';
+import { Loading } from '@components/Loading/loading';
 
 
 export function Groups() {
   const navigation = useNavigation();
+
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ groups, setGroups ] = useState<string[]>([]);
   
   function handleOpenNewGroup() {
@@ -28,6 +31,7 @@ export function Groups() {
     try {
       const data = await groupsGetAll();
       setGroups(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -45,22 +49,25 @@ export function Groups() {
         subTitle="jogue com a sua turma"
       ></HighLight>
 
-      <FlatList
-        data={ groups }
-        keyExtractor={ item => item }
-        renderItem={({ item }) => (
-          <GroupCard
-            title={ item }
-            key={ item }
-            onPress={() => handleOpenGroup(item) }
-          ></GroupCard>
-        )}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={groups?.length == 0 ? { flex: 1 } : { paddingBottom: 100 }}
-        ListEmptyComponent={() => (
-          <ListEmpty message="Que tal cadastrar a primeira turma"></ListEmpty>
-        )}
-      />
+      {
+        isLoading ? <Loading /> :
+        <FlatList
+          data={ groups }
+          keyExtractor={ item => item }
+          renderItem={({ item }) => (
+            <GroupCard
+              title={ item }
+              key={ item }
+              onPress={() => handleOpenGroup(item) }
+            ></GroupCard>
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={groups?.length == 0 ? { flex: 1 } : { paddingBottom: 100 }}
+          ListEmptyComponent={() => (
+            <ListEmpty message="Que tal cadastrar a primeira turma"></ListEmpty>
+          )}
+        />
+      }
 
       <Button
         title="Criar nova turma"
