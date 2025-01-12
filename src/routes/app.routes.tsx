@@ -1,9 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Groups } from '@screens/Groups';
-import { NewGroup } from '@screens/NewGroup';
+import { Groups } from '@screens/Groups/groups';
+import { NewGroup } from '@screens/NewGroup/newGroup';
 import { Players } from '@screens/Players';
-import { Header } from '../components/Header/index';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 

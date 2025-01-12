@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
-import { Routes } from '@routes/index';
+import { Routes } from '@routes/routes';
 
 import theme from '@theme/index';
 import { useFonts , Roboto_400Regular, Roboto_700Bold  } from '@expo-google-fonts/roboto'

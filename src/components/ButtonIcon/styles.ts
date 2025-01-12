@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import theme from '@theme/index';
 
-export type ButtonIconStyleProps = 'PRIMARY' | 'SECONDARY';
+export type ButtonIconStyleProps = 'PRIMARY' | 'SECONDARY' | 'WORNING' | 'DANGER' ;
 
 type Props = {
   type: ButtonIconStyleProps;
@@ -21,8 +21,21 @@ export const Container = styled(TouchableOpacity)<Props>`
   margin-left: 12px;
 `;
 
-export const Icon = styled(MaterialIcons).attrs(({ type, width } : Props) => ({
+export const Icon = styled(MaterialIcons).attrs(({ width }: Props) => ({
   size: width,
-  weigth: '',
-  color: type === 'PRIMARY' ? theme.COLORS.GREEN_700 : theme.COLORS.RED
-}))``;
+}))<Props>`
+    color: ${({ type = 'PRIMARY' }) => {
+    switch (type) {
+      case 'PRIMARY':
+        return theme.COLORS.GREEN_700;
+      case 'SECONDARY':
+        return theme.COLORS.FLAT_UI_BELIZEHOLE;
+      case 'WORNING':
+        return theme.COLORS.FLAT_UI_PUMPKIN;
+      case 'DANGER':
+        return theme.COLORS.RED;
+      default:
+        return theme.COLORS.FLAT_UI_BELIZEHOLE;
+    }
+  }}
+`;

@@ -3,12 +3,13 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { Header } from "@components/Header";
 import { Container } from "./styles";
 import { HighLight } from "@components/HighLight";
-import { GroupCard } from "@components/GroupCard";
-import { useCallback, useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { GroupCard } from "@components/GroupCard/groupCard";
+import { useCallback, useState } from "react";
+import { Alert, FlatList } from "react-native";
 import { ListEmpty } from "@components/ListEmpty"
 import { Button } from "@components/Button";
 import { groupsGetAll } from '@storage/Group/groupsGetAll';
+import { groupRemove } from '@storage/Group/groupRemove';
 
 
 export function Groups() {
@@ -25,6 +26,19 @@ export function Groups() {
     navigation.navigate('newGroup');
   }
 
+  async function handleRemoveGroup(nomeTurma: string) {
+    Alert.alert('Groups', `Remover a turma - ${ nomeTurma }?`, [
+      {
+        text: 'Não',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim',
+        onPress: () => groupRemove(nomeTurma)
+      }
+    ]);
+  }
+
   async function fetchGroups() {
     try {
       const data = await groupsGetAll();
@@ -36,7 +50,7 @@ export function Groups() {
 
   useFocusEffect(useCallback(() => {
     fetchGroups();
-  }, []));
+  }, [fetchGroups]));
 
   return (
     <Container>
@@ -54,6 +68,10 @@ export function Groups() {
             title={ item }
             key={ item }
             onPress={() => handleGoGroup(item) }
+            showButtonIcon={true}
+            buttonIcon="remove"
+            typeButtonIcon="WORNING"
+            onButtonEvent={ () => handleRemoveGroup(item) }
           ></GroupCard>
         )}
         showsVerticalScrollIndicator={false}

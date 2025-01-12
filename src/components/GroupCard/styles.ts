@@ -13,13 +13,19 @@ export const Container = styled(TouchableOpacity)`
   
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   
-  padding: 24px;
+  padding: 24px 8px 24px 24px;
   margin-bottom: 12px;
 `;
 
+export const ContentCard = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Title = styled.Text`
-  font-size: ${ theme.FONT_SIZE.MD };
+  font-size: ${ theme.FONT_SIZE.MD }px;
   color: ${ theme.COLORS.GRAY_200 };
   font-family: ${ theme.FONT_FAMILY.ROBOTO_REGULAR };
 `;
