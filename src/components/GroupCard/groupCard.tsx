@@ -1,6 +1,6 @@
 import { TouchableOpacityProps } from 'react-native';
 import { Container, ContentCard, Title, UsersIcon } from './styles';
-import { ButtonIcon } from '@components/ButtonIcon';
+import { ButtonIcon } from '@components/ButtonIcon/butonIcon';
 import { ButtonIconStyleProps } from '@components/ButtonIcon/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -32,6 +32,7 @@ export function GroupCard({
         <ButtonIcon { ...rest }
           type={ typeButtonIcon }
           icon={ buttonIcon }
+          width={ 24 }
           onPress={ () => onButtonEvent ? onButtonEvent() : undefined }
         ></ButtonIcon>
       }

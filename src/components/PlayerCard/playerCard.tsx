@@ -1,4 +1,4 @@
-import { ButtonIcon } from "@components/ButtonIcon";
+import { ButtonIcon } from "@components/ButtonIcon/butonIcon";
 import { Container, Icon, Name } from "./styes";
 
 type Props = {
@@ -14,7 +14,7 @@ export function PlayerCard({ name, onRemove }: Props) {
         <ButtonIcon
           icon="close"
           width={ 24 }
-          type="SECONDARY"
+          type="DANGER"
           onPress={ onRemove }
         />
       </Container>

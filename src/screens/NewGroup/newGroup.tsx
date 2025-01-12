@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { Header } from '@components/Header';
+import { Header } from '@components/Header/header';
 import { Container, Content, Icon } from './styles';
-import { HighLight } from '@components/HighLight';
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
+import { HighLight } from '@components/HighLight/highLight';
+import { Button } from '@components/Button/button';
+import { Input } from '@components/Input/input';
 import { Alert } from 'react-native';
-import { groupCreate } from '@storage/Group/groupsCreate';
+import { groupCreate } from '@storage/group/groupsCreate';
 import { AppError } from '../../utils/AppError';
 
 export function NewGroup() {
@@ -23,6 +23,7 @@ export function NewGroup() {
       if (group.trim().length === 0) {
         return Alert.alert('Novo Grupo', 'Informe o nome da turma.');
       }
+      
       await groupCreate(group.trim());
       navigation.navigate('players', { group: group })
     } catch (error) {

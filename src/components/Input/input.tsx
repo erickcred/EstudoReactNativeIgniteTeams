@@ -1,9 +1,13 @@
-import { TextInputProps } from 'react-native';
+import { TextInput, TextInputProps } from 'react-native';
 import { Container } from './styles';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import theme from '@theme/index';
 
-export function Input({ ...rest }: TextInputProps) {
+type Props = TextInputProps & {
+  inputRef?: React.RefObject<TextInput>;
+}
+
+export function Input({ inputRef, ...rest }: Props) {
   const [ nomeTurma, setNomeTurma ] = useState();
 
   function addNewTurma() {
@@ -12,9 +16,8 @@ export function Input({ ...rest }: TextInputProps) {
 
   return (
     <Container { ...rest }
+      ref={ inputRef }
       placeholderTextColor={ theme.COLORS.GRAY_300 } 
-      // onChanged={setNomeTurma}
-      // value={nomeTurma}
     />
   )
 }
