@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import theme from '@theme/index';
+import theme from '@theme/theme';
 
 export type ButtonIconStyleProps = 'PRIMARY' | 'SECONDARY' | 'WORNING' | 'DANGER' ;
 

@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native';
 
 import styled from 'styled-components/native';
 import { UsersThree } from 'phosphor-react-native';
-import theme from '@theme/index';
+import theme from '@theme/theme';
 
 export const Container = styled(TouchableOpacity)`
   width: 100%;

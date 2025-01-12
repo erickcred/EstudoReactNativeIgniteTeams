@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 
 import { Routes } from '@routes/routes';
 
-import theme from '@theme/index';
+import theme from '@theme/theme';
 import { useFonts , Roboto_400Regular, Roboto_700Bold  } from '@expo-google-fonts/roboto'
 
 import { Loading } from '@components/Loading/loading';

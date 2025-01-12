@@ -1,7 +1,7 @@
 import { TextInput, TextInputProps } from 'react-native';
 import { Container } from './styles';
 import React, { useState } from 'react';
-import theme from '@theme/index';
+import theme from '@theme/theme';
 
 type Props = TextInputProps & {
   inputRef?: React.RefObject<TextInput>;
