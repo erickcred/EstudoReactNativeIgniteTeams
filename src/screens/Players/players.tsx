@@ -112,10 +112,11 @@ export function Players() {
       const data = await playersGetByGroupAndTeam(group, team);
       
       setPlayers(data);
-      setIsLoding(false);
     } catch (error) {
       Alert.alert('Novo jogador', 'Não foi possível carregar os jogadores do time selecionado!');
       console.log(error);
+    } finally {
+      setIsLoding(false);
     }
   }
 

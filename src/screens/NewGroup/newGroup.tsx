@@ -53,8 +53,6 @@ export function NewGroup() {
           value={ group }
         />
 
-
-
         <Button
           title="Criar"
           style={{ marginTop: 20 }}
